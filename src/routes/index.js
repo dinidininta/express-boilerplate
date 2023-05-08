@@ -1,11 +1,11 @@
 import express from 'express';
-import coursesRoute from './CourseRoutes';
+import bookRoute from './BookRoutes';
 
 const router = express.Router();
 
 const indexRoutes = (app) => {
   app.use('/api', router);
-  router.use('/courses', coursesRoute(app));
+  router.use('/books', bookRoute(app));
 };
 
 export default indexRoutes;

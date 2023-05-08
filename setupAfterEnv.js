@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import dbConfig from './src/db/config';
 
 const clearDatabase = () => {
   const { collections } = mongoose.connection;
@@ -14,3 +15,4 @@ const clearDatabase = () => {
 afterEach(() => clearDatabase());
 
 afterAll(() => mongoose.connection.dropDatabase());
+beforeAll(() => dbConfig.connect());

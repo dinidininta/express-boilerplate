@@ -3,17 +3,17 @@ import express from 'express';
 const router = express.Router();
 
 /*
-  Course routes
+  Book routes
  */
 /**
  * @swagger
  *
- * /api/courses:
+ * /api/books:
  *   get:
  *     tags:
- *     - Courses
- *     summary: 'Get List Of Courses'
- *     description: Create demand request with multiple talent request
+ *     - Books
+ *     summary: 'Get List Of Books'
+ *     description: Show All list of books
  *     produces:
  *       - application/json
  *     responses:
@@ -21,7 +21,7 @@ const router = express.Router();
  *        description: Get Data Successful
  *   post:
  *     tags:
- *     - Courses
+ *     - Books
  *     summary: 'Create Course'
  *     description: Create course
  *     produces:
@@ -31,8 +31,8 @@ const router = express.Router();
  *        description: Create course successful
  */
 const initializeRoutes = (app) => {
-  const { courseController } = app.locals.controllers;
-  router.get('/', courseController.fetchAll);
+  const { bookController } = app.locals.controllers;
+  router.get('/', bookController.fetchAll);
   return router;
 };
 

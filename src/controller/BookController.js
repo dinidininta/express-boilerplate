@@ -1,4 +1,4 @@
-class CourseController {
+class BookController {
   #app;
 
   constructor(app) {
@@ -8,7 +8,7 @@ class CourseController {
 
   async fetchAll(req, res, next) {
     try {
-      const courses = await this.#app.locals.repositories.courseRepository.fetchAll();
+      const courses = await this.#app.locals.models.book.find();
       res.status(200);
       res.json({
         data: courses
@@ -18,4 +18,4 @@ class CourseController {
     }
   }
 }
-export default CourseController;
+export default BookController;
