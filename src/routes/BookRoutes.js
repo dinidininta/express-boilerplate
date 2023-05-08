@@ -33,6 +33,7 @@ const router = express.Router();
 const initializeRoutes = (app) => {
   const { bookController } = app.locals.controllers;
   router.get('/', bookController.fetchAll);
+  router.post('/', bookController.add)
   return router;
 };
 

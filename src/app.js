@@ -2,6 +2,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './utils/swaggerUtils';
 import BookController from './controller/BookController';
+import BookService from './service/BookService';
 import indexRoutes from './routes';
 import Book from './models/book';
 
@@ -20,14 +21,17 @@ const createControllers = () => ({
   bookController: new BookController(app)
 });
 
+const createServices = () => ({
+  bookService: new BookService(app)
+});
+
 const registerDependencies = () => {
   app.locals.models = createModels();
+  app.locals.services = createServices();
   app.locals.controllers = createControllers();
 };
 
 const main = () => {
-  createModels();
-  createControllers();
   registerDependencies();
 
   indexRoutes(app);
