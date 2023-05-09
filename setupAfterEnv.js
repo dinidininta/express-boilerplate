@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dbConfig from './src/db/config';
 
-const clearDatabase = () => {
+const clearDatabase = async () => {
   const { collections } = mongoose.connection;
   const deleteCollectionJob = [];
   // eslint-disable-next-line guard-for-in,no-restricted-syntax
@@ -14,5 +14,8 @@ const clearDatabase = () => {
 
 afterEach(() => clearDatabase());
 
-afterAll(() => mongoose.connection.dropDatabase());
+afterAll(async () => {
+  await mongoose.connection.dropDatabase();
+  await dbConfig.disconnect();
+});
 beforeAll(() => dbConfig.connect());
