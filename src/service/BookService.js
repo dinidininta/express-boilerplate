@@ -18,13 +18,19 @@ class BookService {
     if (foundBook) {
       throw new BookAlreadyExistError();
     }
+    const newBook = await this.findAuthorAndCreateIfNotExists(book);
+    return this.#bookModel.create(newBook);
+  }
+
+  async findAuthorAndCreateIfNotExists(book) {
     const existingAuthor = await this.#authorModel.findOne({ name: book.author.name });
     if (!existingAuthor) {
       const savedAuthor = await this.#authorModel.create(book.author);
       const newBook = { ...book, author: savedAuthor };
-      return this.#bookModel.create(newBook);
+      return newBook;
     }
-    return this.#bookModel.create(book);
+    const newBook = { ...book, author: existingAuthor };
+    return newBook;
   }
 }
 
