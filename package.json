@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm-run-all build server",
     "build": "npm-run-all clean transpile",
-    "server": "node ./bin/app.js",
+    "server": "node ./bin/server.js",
     "transpile": "babel ./src --out-dir ./bin",
     "clean": "rimraf ./bin",
     "watch": "nodemon",
