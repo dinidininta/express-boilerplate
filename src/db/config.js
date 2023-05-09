@@ -10,8 +10,8 @@ const connect = () => {
   );
 };
 
-const disconnect = () => {
-  mongoose.disconnect();
+const disconnect = async () => {
+  await mongoose.disconnect();
 };
 
 export default {

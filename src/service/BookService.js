@@ -1,3 +1,5 @@
+import BookAlreadyExistError from '../errors/BookAlreadyExistError';
+
 class BookService {
   #app;
 
@@ -11,7 +13,7 @@ class BookService {
   async addBook(book) {
     const foundBook = await this.#bookModel.findOne({ title: book.title });
     if (foundBook) {
-      throw new Error('Book Already Exist!');
+      throw new BookAlreadyExistError();
     }
 
     return this.#bookModel.create(book);

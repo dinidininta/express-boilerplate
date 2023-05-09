@@ -1,6 +1,7 @@
 class BookController {
   #app;
-  #bookService
+
+  #bookService;
 
   constructor(app) {
     this.#app = app;
@@ -9,11 +10,11 @@ class BookController {
     this.add = this.add.bind(this);
   }
 
-  async fetchAll(req, res, next) {
+  async fetchAll(request, response, next) {
     try {
       const books = await this.#app.locals.models.book.find();
-      res.status(200);
-      res.json({
+      response.status(200);
+      response.json({
         data: books
       });
     } catch (error) {
@@ -21,11 +22,11 @@ class BookController {
     }
   }
 
-  async add(req, res, next) {
+  async add(request, response, next) {
     try {
-      const createdBook = await this.#bookService.addBook(req.body);
-      res.status(201);
-      res.json(createdBook);
+      const createdBook = await this.#bookService.addBook(request.body);
+      response.status(201);
+      response.json(createdBook);
     } catch (error) {
       next(error);
     }

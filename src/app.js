@@ -5,6 +5,7 @@ import BookController from './controller/BookController';
 import BookService from './service/BookService';
 import indexRoutes from './routes';
 import Book from './models/book';
+import errorMiddleware from './middlewares/errorMiddleware';
 
 require('dotenv').config();
 
@@ -40,5 +41,6 @@ const main = () => {
 };
 
 main();
+app.use(errorMiddleware);
 
 export default app;
