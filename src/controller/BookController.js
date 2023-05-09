@@ -12,10 +12,10 @@ class BookController {
 
   async fetchAll(request, response, next) {
     try {
-      const books = await this.#app.locals.models.book.find();
+      const books = await this.#app.locals.models.book.find().populate('author');
       response.status(200);
       response.json({
-        data: books
+        books
       });
     } catch (error) {
       next(error);

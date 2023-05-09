@@ -5,6 +5,7 @@ import BookController from './controller/BookController';
 import BookService from './service/BookService';
 import indexRoutes from './routes';
 import Book from './models/book';
+import Author from './models/author';
 import errorMiddleware from './middlewares/errorMiddleware';
 
 require('dotenv').config();
@@ -15,7 +16,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, { explorer: t
 app.use(express.json());
 
 const createModels = () => ({
-  book: Book
+  book: Book,
+  author: Author
 });
 
 const createControllers = () => ({
