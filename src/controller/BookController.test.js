@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../app';
 
@@ -11,6 +12,12 @@ describe('BookController', () => {
       name: 'Baskara'
     }
   };
+
+  afterEach(async () => {
+    const { collections } = mongoose.connection;
+    await collections.authors.deleteMany();
+    await collections.books.deleteMany();
+  });
 
   describe('GET /books', () => {
     it('should retrieve all books', async () => {

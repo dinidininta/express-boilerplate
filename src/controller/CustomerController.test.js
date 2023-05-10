@@ -1,8 +1,14 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../app';
 
 describe('CustomerController', () => {
   const { customer } = app.locals.models;
+
+  afterEach(() => {
+    const { collections } = mongoose.connection;
+    collections.customers.deleteMany();
+  });
 
   describe('GET /customers', () => {
     it('should retrieve customer with name containing Bob', async () => {
