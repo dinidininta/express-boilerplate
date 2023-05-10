@@ -7,7 +7,7 @@ describe('CustomerController', () => {
   describe('GET /customer', () => {
     it('should retrieve customer with name containing Bob', async () => {
       await customer.insertMany([{ name: 'Bob' }, { name: 'Bobby' }, { name: 'Alice' }]);
-      const { body } = await request(app).get('/api/customer?name=Bob').expect(200);
+      const { body } = await request(app).get('/api/customers?name=Bob').expect(200);
       const bob = body.customer[0];
       const bobby = body.customer[1];
 
