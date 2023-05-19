@@ -39,8 +39,9 @@ const router = express.Router();
  *                            example: Bob
  */
 const initializeRoutes = (app) => {
-  const { customerController } = app.locals.controllers;
+  const { customerController, borrowingRecordController } = app.locals.controllers;
   router.get('/', customerController.fetchByName);
+  router.post('/:customerId/borrowing-records', borrowingRecordController.add);
   return router;
 };
 

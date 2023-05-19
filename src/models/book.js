@@ -10,6 +10,10 @@ const BookSchema = applyMongooseSchemaOptions({
     type: String,
     required: true
   },
+  quantity: {
+    type: Number,
+    required: true
+  },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'Author' }
 });
 

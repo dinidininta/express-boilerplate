@@ -7,6 +7,7 @@ describe('BookController', () => {
   const harryPotterBook = {
     title: 'Algorithm',
     description: 'wow description',
+    quantity: 1,
     author: {
       name: 'Baskara'
     }
