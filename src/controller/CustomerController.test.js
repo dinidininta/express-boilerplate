@@ -5,9 +5,9 @@ import app from '../app';
 describe('CustomerController', () => {
   const { customer } = app.locals.models;
 
-  afterEach(() => {
+  afterEach(async () => {
     const { collections } = mongoose.connection;
-    collections.customers.deleteMany();
+    await collections.customers.deleteMany({});
   });
 
   describe('GET /customers', () => {

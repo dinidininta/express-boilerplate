@@ -15,8 +15,8 @@ describe('BookController', () => {
 
   afterEach(async () => {
     const { collections } = mongoose.connection;
-    await collections.authors.deleteMany();
-    await collections.books.deleteMany();
+    await collections.authors.deleteMany({});
+    await collections.books.deleteMany({});
   });
 
   describe('GET /books', () => {
@@ -29,7 +29,7 @@ describe('BookController', () => {
         books: JSON.parse(JSON.stringify(books))
       };
 
-      const { body } = await request(app).get('/api/books').expect(200);
+      const { body } = await request(app).get('/api/books?source=test').expect(200);
 
       expect(body).toEqual(expectedResult);
     });
