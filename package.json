@@ -10,7 +10,7 @@
     "transpile": "babel ./src --out-dir ./bin",
     "clean": "rimraf ./bin",
     "watch": "nodemon",
-    "test": "jest --coverage",
+    "test": "jest --coverage --runInBand",
     "lint": "eslint ./ --ext .js"
   },
   "nodemonConfig": {
