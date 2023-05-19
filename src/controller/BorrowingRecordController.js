@@ -1,14 +1,8 @@
 class BorrowingRecordController {
-  #bookService;
-
-  #customerService;
-
-  #borrowingRecordModel;
+  #borrowingRecordService;
 
   constructor(app) {
-    this.#bookService = app.locals.services.bookService;
-    this.#customerService = app.locals.services.customerService;
-    this.#borrowingRecordModel = app.locals.models.borrowingRecord;
+    this.#borrowingRecordService = app.locals.services.borrowingRecordService;
     this.add = this.add.bind(this);
   }
 
@@ -17,14 +11,7 @@ class BorrowingRecordController {
     const { customerId } = params;
     const { id: bookId } = body.book;
     try {
-      const customer = await this.#customerService.findCustomerById(customerId);
-      const book = await this.#bookService.findBookById(bookId);
-      book.quantity -= 1;
-      await book.save();
-      const newBorrowingRecord = {
-        customer, book, type: 'BORROWED'
-      };
-      const createdBorrowingRecord = await this.#borrowingRecordModel.create(newBorrowingRecord);
+      const createdBorrowingRecord = await this.#borrowingRecordService.add(customerId, bookId);
       response.status(201).json(createdBorrowingRecord);
     } catch (error) {
       next(error);

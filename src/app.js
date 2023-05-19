@@ -6,6 +6,7 @@ import CustomerController from './controller/CustomerController';
 import BorrowingRecordController from './controller/BorrowingRecordController';
 import BookService from './service/BookService';
 import CustomerService from './service/CustomerService';
+import BorrowingRecordService from './service/BorrowingRecordService';
 import indexRoutes from './routes';
 import Book from './models/book';
 import Author from './models/author';
@@ -35,7 +36,8 @@ const createControllers = () => ({
 
 const createServices = () => ({
   bookService: new BookService(app),
-  customerService: new CustomerService(app)
+  customerService: new CustomerService(app),
+  borrowingRecordService: new BorrowingRecordService(app)
 });
 
 const registerDependencies = () => {
