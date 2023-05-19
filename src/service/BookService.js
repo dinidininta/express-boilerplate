@@ -1,4 +1,5 @@
 import BookAlreadyExistError from '../errors/BookAlreadyExistError';
+import BookNotFoundError from '../errors/BookNotFoundError';
 
 class BookService {
   #app;
@@ -31,6 +32,14 @@ class BookService {
     }
     const newBook = { ...book, author: existingAuthor };
     return newBook;
+  }
+
+  async findBookById(bookId) {
+    const book = await this.#bookModel.findById(bookId);
+    if (!book) {
+      throw new BookNotFoundError();
+    }
+    return book;
   }
 }
 

@@ -1,5 +1,6 @@
 import BookService from './BookService';
 import BookAlreadyExistError from '../errors/BookAlreadyExistError';
+import BookNotFoundError from '../errors/BookNotFoundError';
 
 describe('BookService', () => {
   const app = {
@@ -7,7 +8,8 @@ describe('BookService', () => {
       models: {
         book: {
           findOne: jest.fn(),
-          create: jest.fn()
+          create: jest.fn(),
+          findById: jest.fn()
         },
         author: {
           findOne: jest.fn(),
@@ -17,34 +19,41 @@ describe('BookService', () => {
     }
   };
   const bookService = new BookService(app);
+
+  const { book, author } = app.locals.models;
+  const baskaraAuthor = {
+    name: 'Baskara'
+  };
+  const savedBaskaraAuthor = {
+    id: '12345',
+    ...baskaraAuthor
+  };
+  const harryPotterBook = {
+    title: 'Harry Potter',
+    description: 'Fiction',
+    author: {
+      ...baskaraAuthor
+    }
+  };
+  const harryPotterBookWithSavedAuthor = {
+    title: 'Harry Potter',
+    description: 'Fiction',
+    author: {
+      ...savedBaskaraAuthor
+    }
+  };
+  const savedHarryPotterBook = {
+    id: '67890',
+    ...harryPotterBookWithSavedAuthor
+  };
+
   afterEach(() => {
     jest.clearAllMocks();
   });
+
   describe('addBook', () => {
-    const { book, author } = app.locals.models;
-    const baskaraAuthor = {
-      name: 'Baskara'
-    };
-    const savedBaskaraAuthor = {
-      id: '12345',
-      ...baskaraAuthor
-    };
-    const harryPotterBook = {
-      title: 'Harry Potter',
-      description: 'Fiction',
-      author: {
-        ...baskaraAuthor
-      }
-    };
-    const harryPotterBookWithSavedAuthor = {
-      title: 'Harry Potter',
-      description: 'Fiction',
-      author: {
-        ...savedBaskaraAuthor
-      }
-    };
     it('should be able to add a book as well as a new author', async () => {
-      book.create.mockResolvedValue(harryPotterBookWithSavedAuthor);
+      book.create.mockResolvedValue(savedHarryPotterBook);
       author.findOne.mockResolvedValue(null);
       author.create.mockResolvedValue(savedBaskaraAuthor);
 
@@ -56,7 +65,7 @@ describe('BookService', () => {
     });
 
     it('should be able to add a book with existing author', async () => {
-      book.create.mockResolvedValue(harryPotterBookWithSavedAuthor);
+      book.create.mockResolvedValue(savedHarryPotterBook);
       author.findOne.mockResolvedValue(savedBaskaraAuthor);
 
       await bookService.addBook(harryPotterBook);
@@ -70,8 +79,26 @@ describe('BookService', () => {
 
       const addBook = () => bookService.addBook(harryPotterBook);
 
-      await expect(addBook()).rejects.toThrow(BookAlreadyExistError);
+      await expect(addBook()).rejects.toThrow(new BookAlreadyExistError());
       expect(book.create).not.toBeCalledWith(harryPotterBook);
+    });
+  });
+
+  describe('#findBookById', () => {
+    it('should return the correct book when given bookId exists', async () => {
+      book.findById.mockResolvedValue(savedHarryPotterBook);
+
+      const actualResult = await bookService.findBookById(savedHarryPotterBook.id);
+
+      expect(actualResult).toEqual(savedHarryPotterBook);
+    });
+
+    it('should throw BookNotFoundError when given bookId does not exist', async () => {
+      book.findById.mockResolvedValue(null);
+
+      const findBookById = () => bookService.findBookById(savedHarryPotterBook.id);
+
+      await expect(findBookById()).rejects.toThrow(new BookNotFoundError());
     });
   });
 });

@@ -41,5 +41,19 @@ describe('BorrowingRecordController', () => {
       expect(actualResult.type).toEqual('BORROWED');
       expect(borrowedBook.quantity).toEqual(9);
     });
+
+    it('should return 404 book not found when trying to borrow nonexistent book', async () => {
+      const savedCustomer = await customer.create(dini);
+      const nonExistentId = '51c35e5ced18cb901d000001';
+      const payload = createBorrowingRecordPayload(nonExistentId);
+      const expectedResult = { message: 'Book Does Not Exist!' };
+
+      const { body: actualResult } = await request(app)
+        .post(`/api/customers/${savedCustomer.id}/borrowing-records`)
+        .send(payload)
+        .expect(404);
+
+      expect(actualResult).toEqual(expectedResult);
+    });
   });
 });
