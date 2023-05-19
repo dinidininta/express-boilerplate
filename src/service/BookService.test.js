@@ -51,7 +51,7 @@ describe('BookService', () => {
     jest.clearAllMocks();
   });
 
-  describe('addBook', () => {
+  describe('#addBook', () => {
     it('should be able to add a book as well as a new author', async () => {
       book.create.mockResolvedValue(savedHarryPotterBook);
       author.findOne.mockResolvedValue(null);

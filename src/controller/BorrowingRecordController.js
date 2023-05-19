@@ -1,13 +1,13 @@
 class BorrowingRecordController {
   #bookService;
 
-  #customerModel;
+  #customerService;
 
   #borrowingRecordModel;
 
   constructor(app) {
     this.#bookService = app.locals.services.bookService;
-    this.#customerModel = app.locals.models.customer;
+    this.#customerService = app.locals.services.customerService;
     this.#borrowingRecordModel = app.locals.models.borrowingRecord;
     this.add = this.add.bind(this);
   }
@@ -17,7 +17,7 @@ class BorrowingRecordController {
     const { customerId } = params;
     const { id: bookId } = body.book;
     try {
-      const customer = await this.#customerModel.findById(customerId);
+      const customer = await this.#customerService.findCustomerById(customerId);
       const book = await this.#bookService.findBookById(bookId);
       book.quantity -= 1;
       await book.save();

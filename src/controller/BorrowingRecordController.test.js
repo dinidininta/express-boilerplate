@@ -55,5 +55,18 @@ describe('BorrowingRecordController', () => {
 
       expect(actualResult).toEqual(expectedResult);
     });
+
+    it('should return 404 customer not found when trying to borrow with nonexistent customer id', async () => {
+      const nonExistentId = '51c35e5ced18cb901d000001';
+      const payload = createBorrowingRecordPayload(nonExistentId);
+      const expectedResult = { message: 'Customer Does Not Exist!' };
+
+      const { body: actualResult } = await request(app)
+        .post(`/api/customers/${nonExistentId}/borrowing-records`)
+        .send(payload)
+        .expect(404);
+
+      expect(actualResult).toEqual(expectedResult);
+    });
   });
 });
