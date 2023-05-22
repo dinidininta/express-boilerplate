@@ -28,18 +28,28 @@ const router = express.Router();
  *                      items:
  *                        type: object
  *                        properties:
+ *                          id:
+ *                            type: string
+ *                            description: The id of book
  *                          title:
  *                            type: string
  *                            example: Algorithm
+ *                            description: The title of book
  *                          description:
  *                            type: string
  *                            example: wow description
+ *                            descripition: The description of book
  *                          author:
  *                            type: object
  *                            properties:
+ *                              id:
+ *                                type: string
+ *                                description: The id of author
  *                              name:
  *                                type: string
  *                                example: Baskara
+ *                                description: The id of author
+ *
  *     post:
  *        tags:
  *        - Books
@@ -77,18 +87,27 @@ const router = express.Router();
  *                  schema:
  *                    type: object
  *                    properties:
+ *                      id:
+ *                        type: string
+ *                        description: The id of book
  *                      title:
  *                        type: string
  *                        example: Algorithm
+ *                        description: The title of book
  *                      description:
  *                        type: string
  *                        example: wow description
+ *                        descripition: The description of book
  *                      author:
  *                        type: object
  *                        properties:
+ *                          id:
+ *                            type: string
+ *                            description: The id of author
  *                          name:
  *                            type: string
  *                            example: Baskara
+ *                            description: The id of author
  *           400:
  *             description: Failed to create a new book due to duplication
  *             content:

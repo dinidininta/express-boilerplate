@@ -34,9 +34,13 @@ const router = express.Router();
  *                      items:
  *                        type: object
  *                        properties:
+ *                          id:
+ *                            type: string
+ *                            description: The id of customer
  *                          name:
  *                            type: string
  *                            example: Bob
+ *                            description: The description of customer
  *   /api/customers/{customerId}/borrowing-records/:
  *     post:
  *       tags:
