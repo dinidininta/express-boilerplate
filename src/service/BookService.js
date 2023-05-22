@@ -35,7 +35,7 @@ class BookService {
   }
 
   async findBookById(bookId) {
-    const book = await this.#bookModel.findById(bookId);
+    const book = await this.#bookModel.findById(bookId).populate('author');
     if (!book) {
       throw new BookNotFoundError();
     }

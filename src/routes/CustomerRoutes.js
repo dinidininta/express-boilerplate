@@ -91,8 +91,16 @@ const router = express.Router();
  *                           description: The description of book
  *                           example: wow description
  *                         author:
- *                           type: string
- *                           description: The id of author
+ *                           type: object
+ *                           description: Book author metadata
+ *                           properties:
+ *                              id:
+ *                                type: string
+ *                                description: The id of author
+ *                              name:
+ *                                type: string
+ *                                description: The name of author
+ *                                example: Paksi
  *                         quantity:
  *                           type: number
  *                           description: The quantity of book that is available
