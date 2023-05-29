@@ -4,8 +4,10 @@
   "description": "Node express boilerplate",
   "main": "src/app.js",
   "scripts": {
-    "start": "npm-run-all build server",
-    "build": "npm-run-all clean transpile",
+    "prestart": "npm run build",
+    "start": "npm run server",
+    "prebuild": "npm run clean",
+    "build": "npm run transpile",
     "server": "node ./bin/server.js",
     "transpile": "babel ./src --out-dir ./bin",
     "clean": "rimraf ./bin",
