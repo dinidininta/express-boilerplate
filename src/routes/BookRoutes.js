@@ -86,6 +86,7 @@ const router = express.Router();
  *                  required:
  *                    - title
  *                    - author
+ *                    - quantity
  *        responses:
  *           201:
  *             description: Successfully created a new book
