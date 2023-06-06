@@ -39,6 +39,10 @@ const router = express.Router();
  *                            type: string
  *                            example: wow description
  *                            descripition: The description of book
+ *                          quantity:
+ *                            type: number
+ *                            example: 10
+ *                            descripition: The quantity of book
  *                          author:
  *                            type: object
  *                            properties:
@@ -70,6 +74,9 @@ const router = express.Router();
  *                    description:
  *                      type: string
  *                      example: wow description
+ *                    quantity:
+ *                      type: number
+ *                      example: 10
  *                    author:
  *                      type: object
  *                      properties:
@@ -98,6 +105,10 @@ const router = express.Router();
  *                        type: string
  *                        example: wow description
  *                        descripition: The description of book
+ *                      quantity:
+ *                        type: number
+ *                        example: 10
+ *                        descripition: The quantity of book
  *                      author:
  *                        type: object
  *                        properties:
